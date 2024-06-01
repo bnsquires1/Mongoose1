@@ -1,20 +1,24 @@
 const { Schema, model } = require('../config/db-connection');
 
 const userSchema = Schema({
-  email: {
-    type: String,
+  class_id: {
+    type: Number,
     required: true,
-    unique: true,
   },
-  password: {
-    type: String,
+  learner_id: {
+    type: Number,
     required: true,
-    unique: true,
-    min: 5,
   },
-  age: {
-    
+  scores: [{
+    type: {
+      type: String,
+    required: true,
+  },
+  score : {
+    type: Number,
+    required: true,
   }
+  }],
 });
 
 module.exports = model('User', userSchema);
