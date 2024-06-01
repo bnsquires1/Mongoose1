@@ -3,7 +3,8 @@ const User = require('../models/User');
 module.exports = {
   getOneGrade,
   addGradeScore,
-  deleteGradeScore
+  deleteGradeScore,
+  deleteByLearnerId,
 };
 
 
@@ -44,10 +45,33 @@ async function deleteGradeScore(req, res) {
 }
 
 //get route for backwards compatibility
+async function getOneGrade(req, res) {
+  try {
+    const grade = await Grade.findById(req.params.id);
+    const newDocument = req.body;
+
+    if (newDocument.student_id) {
+      newDocument.learner_id = newDocument.student_id;
+      delete newDocument.student_id;
+    }
+
+    res.status(200).json(grade);
+  } catch (err) {
+    res.status(400).json('No Bueno:(');
+  }
+}
 
 //get a learner's grade data
 
 //delete one grade by learner ID
+async function deleteByLearnerId(req, res) {
+  try {
+    const grade = await grade.findByIdAndDelete(req.params.id)
 
+    res.status(200).json(deletedgrade);
+  } catch (err) {
+    res.status(400).send(err)
+  }
+};
 //
 

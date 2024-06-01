@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const gradesCtrl = require('../controllers/users.js');
+const gradesCtrl = require('../controllers/grades.js');
 
 const router = Router();
 
